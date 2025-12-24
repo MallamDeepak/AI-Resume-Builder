@@ -16,9 +16,10 @@ function App() {
     <div className="app">
       <Routes>
         <Route path="/admin" element={<Admin />} />
+        <Route path="/" element={<LandingPage />} />
       </Routes>
 
-      {/* HOME PAGE */}
+      HOME PAGE
       {currentPage === "home" && <LandingPage />}
 
       {/* TEMPLATES PAGE */}

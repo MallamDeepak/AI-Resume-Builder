@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function LandingPage() {
+function LandingPage({ onNavigateToTemplates }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [selectedTemplate, setSelectedTemplate] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('students')
@@ -29,12 +29,12 @@ function LandingPage() {
   }, [])
 
   const templates = [
-    { name: "Chronological", desc: "Traditional timeline format", image: "chronological" },
-    { name: "Functional", desc: "Skills-based layout", image: "functional" },
-    { name: "Creative", desc: "Bold and unique design", image: "creative" },
-    { name: "Modern", desc: "Contemporary professional", image: "modern" },
-    { name: "Minimalist", desc: "Clean and simple", image: "minimalist" },
-    { name: "Executive", desc: "Senior-level format", image: "executive" },
+    { name: "Chronological", desc: "Traditional timeline format", image: "C:/Users/Admin/AI-Resume-Builder/frontend/public/templates/chronological.png" },
+    { name: "Functional", desc: "Skills-based layout", image: "C:/Users/Admin/AI-Resume-Builder/frontend/public/templates/functional.png" },
+    { name: "Creative", desc: "Bold and unique design", image: "C:/Users/Admin/AI-Resume-Builder/frontend/public/templates/creative.png" },
+    { name: "Modern", desc: "Contemporary professional", image: "C:/Users/Admin/AI-Resume-Builder/frontend/public/templates/modern.png" },
+    { name: "Minimalist", desc: "Clean and simple", image: "C:/Users/Admin/AI-Resume-Builder/frontend/public/templates/minimalist.png" },
+    { name: "Executive", desc: "Senior-level format", image: "C:/Users/Admin/AI-Resume-Builder/frontend/public/templates/executive.png" },
   ]
 
   const toggleMobileMenu = () => {
@@ -245,7 +245,10 @@ function LandingPage() {
                 <i className="fas fa-graduation-cap"></i>
                 Start Building for Free
               </button>
-              <button className="px-10 py-5 text-lg font-bold text-[#00d9ff] border-2 border-[#00d9ff] rounded-xl transition-all duration-300 hover:bg-[#00d9ff]/10 hover:-translate-y-1">
+              <button
+                onClick={onNavigateToTemplates}
+                className="px-10 py-5 text-lg font-bold text-[#00d9ff] border-2 border-[#00d9ff] rounded-xl transition-all duration-300 hover:bg-[#00d9ff]/10 hover:-translate-y-1"
+              >
                 View Templates
               </button>
             </div>
@@ -263,7 +266,8 @@ function LandingPage() {
                 {templates.slice(0, 6).map((template, index) => (
                   <div 
                     key={index}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl p-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-[#00d9ff] hover:-translate-y-1"
+                    onClick={onNavigateToTemplates}
+                    className="cursor-pointer bg-white/[0.03] border border-white/5 rounded-xl p-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-[#00d9ff] hover:-translate-y-1"
                   >
                     <div className="flex flex-col items-center gap-2 mb-3">
                       <div className="w-10 h-10 bg-gradient-to-br from-[#00d9ff] to-[#4c7fff] rounded-full border-2 border-white/20"></div>
@@ -279,43 +283,6 @@ function LandingPage() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Category Buttons */}
-        <div className="relative z-10 flex flex-col md:flex-row justify-center gap-4 mt-12 px-8">
-          <button 
-            className={`flex items-center justify-center gap-3 px-8 py-4 text-base font-semibold rounded-full transition-all duration-300 backdrop-blur-md ${
-              selectedCategory === 'students'
-                ? 'bg-gradient-to-r from-[#00d9ff] to-[#4c7fff] border-transparent shadow-[0_10px_30px_rgba(0,217,255,0.3)]'
-                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-[#00d9ff] hover:-translate-y-0.5'
-            }`}
-            onClick={() => setSelectedCategory('students')}
-          >
-            <i className="fas fa-graduation-cap text-lg"></i>
-            For Students
-          </button>
-          <button 
-            className={`flex items-center justify-center gap-3 px-8 py-4 text-base font-semibold rounded-full transition-all duration-300 backdrop-blur-md ${
-              selectedCategory === 'hr'
-                ? 'bg-gradient-to-r from-[#00d9ff] to-[#4c7fff] border-transparent shadow-[0_10px_30px_rgba(0,217,255,0.3)]'
-                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-[#00d9ff] hover:-translate-y-0.5'
-            }`}
-            onClick={() => setSelectedCategory('hr')}
-          >
-            <i className="fas fa-users text-lg"></i>
-            For HR Teams
-          </button>
-          <button 
-            className={`flex items-center justify-center gap-3 px-8 py-4 text-base font-semibold rounded-full transition-all duration-300 backdrop-blur-md ${
-              selectedCategory === 'faculty'
-                ? 'bg-gradient-to-r from-[#00d9ff] to-[#4c7fff] border-transparent shadow-[0_10px_30px_rgba(0,217,255,0.3)]'
-                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-[#00d9ff] hover:-translate-y-0.5'
-            }`}
-            onClick={() => setSelectedCategory('faculty')}
-          >
-            <i className="fas fa-chalkboard-teacher text-lg"></i>
-            For Faculty
-          </button>
         </div>
       </section>
 
@@ -374,10 +341,10 @@ function LandingPage() {
             {howItWorksSteps.map((step, index) => (
               <div 
                 key={index}
-                className="step-card opacity-0 -translate-x-24 transition-all duration-700 grid lg:grid-cols-[1fr_300px] gap-8 p-10 rounded-3xl hover:translate-x-2"
+                className="step-card opacity-0 -translate-x-24 transition-all duration-700 grid lg:grid-cols-2 gap-8 p-10 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-[#00d9ff] hover:translate-x-2"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 order-2 lg:order-1">
                   <div className="inline-flex items-center gap-3 bg-[#00d9ff]/10 px-6 py-3 rounded-full w-fit border border-[#00d9ff]/20">
                     <i className={`fas ${step.icon} text-[#00d9ff] text-lg`}></i>
                     <span className="text-[#00d9ff] font-bold text-sm tracking-widest">{step.title}</span>
@@ -404,7 +371,7 @@ function LandingPage() {
                   </button>
                 </div>
                 
-                <div className="bg-white/[0.03] rounded-2xl min-h-[200px] flex items-center justify-center text-gray-400 text-sm">
+                <div className="bg-gradient-to-br from-[#00d9ff]/10 to-[#4c7fff]/10 rounded-2xl min-h-[300px] flex items-center justify-center text-gray-400 text-sm border border-white/10 order-1 lg:order-2">
                   Visual Placeholder
                 </div>
               </div>
@@ -476,7 +443,7 @@ function LandingPage() {
 
       {/* FOOTER */}
       <footer className="bg-[#0a1628]/95 border-t border-white/5 px-8 py-12 mt-auto">
-        <div className="max-w-[1400px] mx-auto grid md:grid-cols-4 gap-8 mb-8">
+        <div className="max-w-[1400px] mx-auto grid md:grid-cols-5 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 text-2xl font-extrabold mb-4 font-['Space_Grotesk']">
               <span className="text-[#ff6b3d]">UPTO<span className="text-[#00d9ff]">SKILLS</span></span>
@@ -488,6 +455,21 @@ function LandingPage() {
 
           <div>
             <h4 className="text-white text-lg font-bold mb-4">Product</h4>
+            <ul className="flex flex-col gap-3">
+              <li className="text-gray-400 cursor-pointer transition-all duration-300 hover:text-[#00d9ff] hover:translate-x-1 text-sm">
+                Privacy
+              </li>
+              <li className="text-gray-400 cursor-pointer transition-all duration-300 hover:text-[#00d9ff] hover:translate-x-1 text-sm">
+                Terms
+              </li>
+              <li className="text-gray-400 cursor-pointer transition-all duration-300 hover:text-[#00d9ff] hover:translate-x-1 text-sm">
+                Contact
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white text-lg font-bold mb-4">Features</h4>
             <ul className="flex flex-col gap-3">
               <li className="text-gray-400 cursor-pointer transition-all duration-300 hover:text-[#00d9ff] hover:translate-x-1 text-sm">
                 Features

@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "./AdminSidebar";
+import AdminNavbar from "./AdminNavBar/AdminNavBar";
+import AdminSidebar from "./AdminSidebar/AdminSidebar";
 
-const AdminLayout = () => {
+export default function AdminLayout() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white">
-      <AdminSidebar />
-      <main className="flex-1 ml-0 md:ml-64 p-6">
+    <>
+      <AdminNavbar />
+
+      <AdminSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+
+      <main
+        className={`
+          pt-16 min-h-screen bg-slate-950
+          transition-all duration-300 ease-in-out
+          ml-0
+          ${isCollapsed ? "md:ml-20" : "md:ml-64"}
+        `}
+      >
         <Outlet />
       </main>
-    </div>
+    </>
   );
-};
-
-export default AdminLayout;
+}

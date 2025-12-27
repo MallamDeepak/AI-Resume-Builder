@@ -157,3 +157,35 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* MARQUEE (continuous scrolling templates) */
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  /* Duration controls speed (longer = slower) */
+  animation: marquee 28s linear infinite;
+}
+
+/* Pause on hover */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  flex: 0 0 auto;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Optional: reverse direction by adding .reverse to .marquee-track */
+.marquee-track.reverse { animation-direction: reverse; }

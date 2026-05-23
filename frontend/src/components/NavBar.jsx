@@ -47,7 +47,7 @@ const features = [
       hoverClass: "hover:bg-purple-50",
     },
     {
-      name: "Guilded AI Builder",
+      name: "Guided AI Builder",
       path: "/AI-builder",
       icon: Zap,
       colorClass: "text-cyan-500",
@@ -157,14 +157,15 @@ export default function NavBar() {
         const { id } = decodeJWT(token);
         const res = await axiosInstance.get(`/api/user/profile/${id}`);
         setUserName(res.data.username);
-        setLoadingStatus(false);
       } catch (err) {
         console.error(err.response?.data || err.message);
+      } finally {
+        setLoadingStatus(false);
       }
     };
 
     fetchUsers();
-  }, []);
+  }, [isLoggedIn]);
 
   //profile dropdown menu click outside handler
   useEffect(() => {
@@ -191,6 +192,10 @@ export default function NavBar() {
           <button
             className="text-2xl lg:hidden p-1 order-1"
             onClick={toggleMobileMenu}
+            type="button"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? (
               <X size={24} className="sm:w-7 sm:h-7" />
@@ -310,11 +315,15 @@ export default function NavBar() {
           </div>
 
           {isLoggedIn && (
-            <div
+            <button
               title="Profile"
               ref={profileMenuOpenRef}
               onClick={() => setProfileMenuOpen(!profileMenuOpen)}
               className="flex items-center gap-2 p-1 md:pr-2 rounded-full cursor-pointer md:hover:bg-gray-100 order-3"
+              type="button"
+              aria-label="Open profile menu"
+              aria-haspopup="menu"
+              aria-expanded={profileMenuOpen}
             >
               <div className="bg-gray-200 p-2 rounded-full items-center md:flex">
                 <User size={20} />
@@ -333,7 +342,7 @@ export default function NavBar() {
                   }`}
                 />
               </div>
-            </div>
+            </button>
           )}
           {/* DROPDOWN MENU FOR LOGGED IN USER */}
           <div
@@ -364,9 +373,10 @@ export default function NavBar() {
               <span className="text-sm font-medium">Dashboard</span>
             </Link>
 
-            <div
+            <button
               className="flex items-center gap-3 px-4 py-2 rounded cursor-pointer bg-red-500 text-white mt-2 
                   hover:bg-red-700 hover:text-white transition-colors"
+              type="button"
               onClick={() => {
                 localStorage.removeItem("token");
                 navigate("/login");
@@ -374,7 +384,7 @@ export default function NavBar() {
             >
               <LogOut size={18} />
               <span className="text-sm font-medium">Logout</span>
-            </div>
+            </button>
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -410,6 +420,7 @@ export default function NavBar() {
 
       {/* Mobile Sidebar - Now slides from LEFT */}
       <div
+        id="mobile-navigation"
         className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -434,23 +445,23 @@ export default function NavBar() {
           <div className="flex-1 overflow-y-auto">
             <ul className="py-4">
               <li className="px-6 py-3 hover:bg-gray-50 transition-colors">
-                <a
-                  href="/about"
+                <Link
+                  to="/about"
                   onClick={closeMobileMenu}
                   className="block text-gray-700 font-medium"
                 >
                   About us
-                </a>
+                </Link>
               </li>
 
               <li className="px-6 py-3 hover:bg-gray-50 transition-colors">
-                <a
-                  href="/#free-templates"
+                <Link
+                  to="/#free-templates"
                   onClick={closeMobileMenu}
                   className="block text-gray-700 font-medium"
                 >
                   Templates
-                </a>
+                </Link>
               </li>
 
               {/* Features Accordion */}
@@ -476,14 +487,14 @@ export default function NavBar() {
                           key={feature.path}
                           className="px-8 py-3 hover:bg-gray-100 transition-colors"
                         >
-                          <a
-                            href={feature.path}
+                          <Link
+                            to={feature.path}
                             onClick={closeMobileMenu}
                             className="flex items-center gap-3 text-gray-600"
                           >
                             <Icon className={`${feature.colorClass} w-5 h-5`} />
                             <span className="text-sm">{feature.name}</span>
-                          </a>
+                          </Link>
                         </li>
                       );
                     })}
@@ -493,34 +504,34 @@ export default function NavBar() {
 
               {isLoggedIn && (
                 <li className="px-6 py-3 hover:bg-gray-50 transition-colors">
-                  <a
-                    href="/user/dashboard"
+                  <Link
+                    to="/user/dashboard"
                     onClick={closeMobileMenu}
                     className="block text-gray-700 font-medium"
                   >
                     Dashboard
-                  </a>
+                  </Link>
                 </li>
               )}
 
               <li className="px-6 py-3 hover:bg-gray-50 transition-colors">
-                <a
-                  href="/pricing"
+                <Link
+                  to="/pricing"
                   onClick={closeMobileMenu}
                   className="block text-gray-700 font-medium"
                 >
                   Pricing
-                </a>
+                </Link>
               </li>
 
               <li className="px-6 py-3 hover:bg-gray-50 transition-colors">
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact"
                   onClick={closeMobileMenu}
                   className="block text-gray-700 font-medium"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

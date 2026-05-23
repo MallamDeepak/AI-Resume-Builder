@@ -82,6 +82,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/HelpCenter" element={<HelpCenter />} />
+            <Route path="/helpcenter" element={<HelpCenter />} />
             <Route path="/about" element={<About />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/blog" element={<BlogPage />} />
@@ -95,6 +96,8 @@ function App() {
             <Route path="/score-checker" element={<ScoreChecker />} />
             <Route path="/resume-hub" element={<ResumeHubPage />} />
             <Route path="/growths" element={<GrowthInsightsPage />} />
+            <Route path="/growth-insights" element={<GrowthInsightsPage />} />
+            <Route path="/growthinsights" element={<GrowthInsightsPage />} />
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/resume-examples" element={<ResumeExamplesPage />} />
             <Route path="/how-to-write-a-resume" element={<ResumeGuide />} />
@@ -106,17 +109,7 @@ function App() {
             <Route path="/faq" element={<Faq />} />
             <Route path="/resume-checker" element={<ResumeChecker />} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/help-center" element={<HelpCenter />} />
-            <Route path="/ats-checker" element={<ATSCheckerPage />} />
             <Route path="/TemplatesFeature" element={<TemplatesFeature />} />
-            <Route path="/AI-builder" element={<AIBuilderPage />} />
-            <Route
-              path="/content-enhance"
-              element={<AIContentEnhancementPage />}
-            />
-            <Route path="/score-checker" element={<ScoreChecker />} />
-            <Route path="/resume-hub" element={<ResumeHubPage />} />
-            <Route path="/growths" element={<GrowthInsightsPage />} />
             <Route path="/cover-letter" element={<AICoverLetterPage />} />
             <Route
               path="/cover-letter-examples"
@@ -127,6 +120,7 @@ function App() {
               path="/WritingCoverLetter"
               element={<WritingCoverLetter />}
             />
+            <Route path="/LogIn" element={<LoginPage />} />
             {/* ================= USER DASHBOARD ROUTES ================= */}
             <Route
               path="/user/*"
